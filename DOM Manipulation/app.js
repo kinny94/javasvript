@@ -82,3 +82,26 @@ setTimeout(() => {
     document.body.appendChild(div);
     return;
 }, 2000);
+
+const h1 = document.getElementById("myID");
+h1.addEventListener("click", () => {
+    console.log("Clicked!");     
+});
+
+h1.addEventListener("mouseover", () => {
+    console.log('mouse up event!');
+});
+
+const eleList2 = document.querySelectorAll("li");
+for (let i=0; i<eleList2.length;i++) {
+    console.log(eleList2[i]);
+    eleList2[i].style.backgroundColor = "yellow";
+    eleList2[i].style.padding = "5px";
+    eleList2[i].addEventListener('click', makeItRed);
+}
+
+function makeItRed() {
+    console.log(this);
+    let temp = this.classList.toggle("red");
+    console.log(temp);
+}
