@@ -105,3 +105,34 @@ function makeItRed() {
     let temp = this.classList.toggle("red");
     console.log(temp);
 }
+
+const imgList = document.querySelectorAll('img');
+for (let i=0; i<imgList.length; i++) {
+    imgList[i].addEventListener('click', () => {
+        console.log(imgList[i].src);
+        window.open(imgList[i].src, "myImage", "resizable=yes,width=500,height=500");
+    });
+}
+
+const mainList = document.querySelector("ul");
+const inputEle = document.querySelector('input');
+const clicker = document.querySelector('button');
+clicker.addEventListener('click', () => {
+    let li = document.createElement('li');
+    let tempText = document.createTextNode(inputEle.value);
+    li.appendChild(tempText);
+    mainList.appendChild(li);
+});
+
+const btn = document.querySelector('.bg');
+
+btn.addEventListener('click', () => {
+    console.log('color');
+    let myColor = "rgb("+random(255)+"," + random(255)+"," + random(255)+")";
+    console.log(myColor);
+    document.body.style.backgroundColor = myColor;
+});
+
+function random(num) {
+    return Math.floor(Math.random() * (num + 1));
+}
