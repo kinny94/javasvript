@@ -136,3 +136,85 @@ btn.addEventListener('click', () => {
 function random(num) {
     return Math.floor(Math.random() * (num + 1));
 }
+
+const btn2 = document.querySelector('.bg');
+btn2.addEventListener('click', (e) => {
+    console.log(e);
+})
+
+const spans = document.querySelectorAll('span');
+spans.forEach((el, index) => {
+    console.log(el);
+    el.style.border = "1px solid black";
+    el.style.display = "block";
+    el.style.padding = "5px";
+    el.addEventListener('click', (e) => {
+        console.log(e);
+        e.target.style.backgroundColor = ranColor();
+    });
+});
+
+function  ranColor() {
+    return "rgb("+random(255)+"," + random(255)+"," + random(255)+")";
+}
+
+function random(num) {
+    return Math.floor(Math.random() * (num + 1));   
+}
+
+// let keys = {};
+// document.addEventListener("keydown", pressKeyOn);
+// document.addEventListener("keyup", pressKeyOff);
+
+// function pressKeyOff(event) {
+//     console.log(event.key);
+//     event.preventDefault();
+//     keys[event.key] = true;
+//     console.log(keys);
+// }
+
+// function pressKeyOn(event) {
+//     console.log(event.key);
+//     event.preventDefault();
+//     keys[event.key] = false;
+//     console.log(keys);
+// }
+
+const elementPress = document.querySelector("input");
+elementPress.addEventListener("keypress", addItem);
+
+function addItem(event) {
+    console.log(event);
+    document.querySelector("h1").textContent = elementPress.value;
+
+    if (elementPress.value.length > 5) {
+        elementPress.style.backgroundColor = "red";
+    } else {
+        elementPress.style.backgroundColor = "white";    
+    }
+
+    if (event.keyCode === 13 && elementPress.value.length > 1) {
+        document.querySelector('h1').style.backgroundColor = "yellow";
+    }
+}
+
+const ul2 = document.querySelector("ul");
+document.addEventListener("keydown", (e) => {
+    let li = document.createElement("li");
+    let temp = e.key+"(" + e.keyCode + ")";
+    let textC = document.createTextNode(temp);
+    li.appendChild(textC);
+    ul2.appendChild(li);
+});
+
+const lis = document.querySelectorAll('li');
+for (let x=0; x<lis.length; x++) {
+    console.log(lis[x]);
+    lis[x].addEventListener("mouseover", function(e) {
+        this.classList.add("red");
+    });
+    lis[x].addEventListener("mouseout", function(e) {
+        this.classList.remove("red");
+    });
+}
+
