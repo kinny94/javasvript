@@ -64,3 +64,57 @@ function build() {
     player.el.style.left = player.y + "px";
     document.body.appendChild(player.el);
 }
+
+// encode decode uri components
+let url = window.location.href;
+console.log(url);
+let encodeUrl = encodeURIComponent(url);
+let decodeUrl = decodeURIComponent(encodeUrl);
+console.log(encodeUrl);
+console.log(decodeUrl);
+
+function Person(first, last) {
+    this.firstName = first;
+    this.lastName = last;
+}
+
+Person.prototype.fullName = function() {
+    return this.firstName + " " + this.lastName;
+}
+
+const me = new Person("Arjun", "Dass");
+console.log(me);
+console.log(me.fullName());
+
+Date.prototype.addDays = function(days) {
+    return new Date(this.valueOf() + days * 864e5);
+}
+
+console.log(new Date().addDays(7));
+
+let xhr = new XMLHttpRequest();
+const url2 = "https://api.chucknorris.io/jokes/random";
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+       console.log(xhr.response);
+       let joke = JSON.parse(xhr.response);
+       console.log(joke);
+       document.querySelector('div').innerHTML = joke.value; 
+    }
+}
+
+xhr.open("GET", url2);
+xhr.send();
+console.log(xhr);
+
+const btn = document.querySelector('button');
+btn.addEventListener('click', getJoke);
+
+function getJoke() {
+    fetch(url).then((response) => {
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+        document.querySelector('div').textContent = data.value;
+    });
+}
