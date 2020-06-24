@@ -162,24 +162,6 @@ function random(num) {
     return Math.floor(Math.random() * (num + 1));   
 }
 
-// let keys = {};
-// document.addEventListener("keydown", pressKeyOn);
-// document.addEventListener("keyup", pressKeyOff);
-
-// function pressKeyOff(event) {
-//     console.log(event.key);
-//     event.preventDefault();
-//     keys[event.key] = true;
-//     console.log(keys);
-// }
-
-// function pressKeyOn(event) {
-//     console.log(event.key);
-//     event.preventDefault();
-//     keys[event.key] = false;
-//     console.log(keys);
-// }
-
 const elementPress = document.querySelector("input");
 elementPress.addEventListener("keypress", addItem);
 
@@ -218,3 +200,40 @@ for (let x=0; x<lis.length; x++) {
     });
 }
 
+
+const animals = document.querySelectorAll(".animal");
+for (let i=0; i<animals.length; i++) {
+    animals[i].addEventListener('click', () => {
+        let animal = animals[i].innerHTML;
+        let lowerAnimal = animal.toLowerCase();
+        makeSound(lowerAnimal);
+        addStyle(lowerAnimal);
+    });
+}
+
+function addStyle(name) {
+    let activeElement = document.querySelector("." + name);
+    activeElement.classList.add("active");
+    setTimeout(() => {
+        activeElement.classList.remove('active');
+    }, 1000);
+}
+
+function makeSound(name) {
+    switch(name) {
+        case "lion": 
+            let sound1 = new Audio("sound/lion.mp3");
+            sound1.play();
+            break;
+
+        case "dog": 
+            let sound2 = new Audio("sound/dog.mp3");
+            sound2.play();
+            break;
+
+        case "cougar":
+            let sound3 = new Audio("sound/cougar.mp3");
+            sound3.play();
+            break;
+    }
+}
