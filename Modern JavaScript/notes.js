@@ -9,12 +9,14 @@
     typeOf(null) - is object
     typeOf(undefined) is undefined
     typeOf(NaN) is number
+    typeOf(() => consolg.log()) is also an object
 */
 
 console.log(typeof(124));
 console.log(typeof(undefined));
 console.log(typeof(null));
 console.log(typeof(NaN));
+console.log(typeof(() => 'test'));
 
 /*
     Comparisons
@@ -67,3 +69,73 @@ scopingGreet();
 
 console.log(hoistingName);
 var hoistingName = 'kinny'; // undefined
+
+/*
+    Function expressions vs Function declaration
+    function expression will be hoisted to the top and can be used any where
+    function declaration also get hoised but as undefined
+*/
+
+function functionDeclaraion(a, b) {
+    console.log(a, b);
+}
+
+const functionDeclaration = function(a, b) {
+    console.log(a, b);
+}
+
+/*
+    Rest Parameters- The idea is tha we can pass as many arguements as we want and create a sum for those.
+    But we can't know how many arguments will this function will receive
+*/
+
+const restParameterSumUp =  (...parameters) => {
+    let sum = 0;
+    parameters.map((number) => sum = sum + number);
+    return sum;
+}
+
+console.log(restParameterSumUp(1, 2, 3, 4, 5, 6, 7));
+
+/*
+    The bind function creates its new function that, when called,  has its own this keyword set to the provided value, with a given sequence of arguements preceding
+    any provided when the new function is called
+*/
+
+const bindObject = {
+    x: 42,
+    getX: function() {
+        return this.x;
+    }
+};
+
+const bindUnBoundGetX = bindObject.getX;
+console.log(bindUnBoundGetX()); // this will return undefeind 
+
+const bindBoundGetX = bindUnBoundGetX.bind(bindObject);
+console.log(bindBoundGetX());
+
+/*
+    The apply method calls a function with a given `this` value, and arguements provided as an array
+*/
+const applyNumbers = [5, 6, 7, 8, 9];
+const applyMax = Math.max.apply(null, applyNumbers);
+console.log(applyMax);
+const applyMin = Math.min.apply(null, applyNumbers);
+console.log(applyMin);
+
+/*
+    Call: The call method calls a function with a given `this` value and arguements provided individually
+*/
+
+function callProduct(name , price) {
+    this.name = name;
+    this.price = price;
+}
+
+function callFood(name, price) {
+    callProduct.call(this, name, price);
+    this.category = 'food';
+}
+
+console.log(new callFood('cheese', 5).name);
