@@ -139,3 +139,38 @@ function callFood(name, price) {
 }
 
 console.log(new callFood('cheese', 5).name);
+
+/*
+    Pure function = is a function which for any function with any given arguement will always produce the same output and does not trigger any side effect ie
+    It changes anything outside of the functions
+
+*/
+
+function pureFunctionAdd(num1, num2) { 
+    return num1 + num2;
+}
+
+function pureFunctionRandom(num1) {
+    return Math.random() * num1;
+}
+
+console.log(pureFunctionAdd(1, 5));
+console.log(pureFunctionAdd(12, 15));
+console.log(pureFunctionRandom(12, 15));
+
+/*
+    Factory Functions: The idea behind factory function is that you have a function that produces another function
+*/
+
+function factoryCreateTaxCalculator(tax) {
+    function factoryCalculateTax(amount) {
+        return amount * tax;
+    } 
+
+    return factoryCalculateTax;
+}
+const factoryVatCalculate = factoryCreateTaxCalculator(0.19);
+const factoryIncomeTaxAmount = factoryCreateTaxCalculator(0.25);;
+
+console.log(factoryVatCalculate(100));
+console.log(factoryIncomeTaxAmount(100));
