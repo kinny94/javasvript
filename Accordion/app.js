@@ -8,3 +8,4 @@ accordion.forEach((ele) => {
         ele.classList.toggle('active');
     });
 });
+
