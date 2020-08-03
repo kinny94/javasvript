@@ -174,3 +174,28 @@ const factoryIncomeTaxAmount = factoryCreateTaxCalculator(0.25);;
 
 console.log(factoryVatCalculate(100));
 console.log(factoryIncomeTaxAmount(100));
+
+/*
+    Closure: Every function in javascript is a closure. Its binds a function to its lexical environment. A closures gives you access to an outer function's scope from an inner
+    The function first checks its inned environemnt and only if doesn;t find a variable with that name, it goes to the outer environment
+*/
+
+let closureUserName = 'Mark;'
+function closureGreetUser() {
+    let name = closureUserName;
+    console.log(`Hi ${closureUserName}!!`);
+    console.log(`Hi ${name}!!`);
+}
+
+closureUserName = 'Dan';
+closureGreetUser();
+
+function closureAdder(x) {
+    return function adder(y) {
+        return x + y;
+    } 
+}
+
+let closureVar1 = closureAdder(5);
+console.log(closureVar1(5));
+console.log(closureAdder(5)(6));

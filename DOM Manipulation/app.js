@@ -218,7 +218,7 @@ function addStyle(name) {
         activeElement.classList.remove('active');
     }, 1000);
 }
-
+    
 function makeSound(name) {
     switch(name) {
         case "lion": 
