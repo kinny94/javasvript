@@ -19,7 +19,7 @@ function createPost(post) {
         setTimeout(() => {
             posts.push(post);   
             const error = false;
-
+            
             if (!error) {
                 resolve();
             } else {
@@ -42,3 +42,12 @@ const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then((resul
 
 Promise.all([promise1, promise2, promise3, promise4]).then((result) => console.log(result)); 
 Promise.race([promise1, promise2, promise3, promise4]).then((result) => console.log(result));
+
+const greetingPoster = new Promise((resolve, reject) => {
+    console.log('Inside Promise (proof of being eager)');
+    resolve('Welcome! Nice to meet you.');
+});
+
+console.log('Before calling then on Promise');
+
+greetingPoster.then(res => console.log(`Greeting from promise: ${res}`));
