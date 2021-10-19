@@ -1,7 +1,23 @@
 const http = require('http');
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(bodyParser.urlencoded());
+
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
+
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+});
+
+app.listen(3000);  
 
 /*
 app.use((req, res, next) => {
@@ -9,16 +25,3 @@ app.use((req, res, next) => {
     next(); // this will complete the request.. so that the next middleware works
 });
 */
-
-app.use('/product', (req, res, next) => {
-    console.log('In another middleware..');
-    res.send("<h1>Hello from Productx    page</h1>")
-});
-
-app.use('/', (req, res, next) => {
-    console.log('In another middleware..');
-    res.send("<h1>Hello from express</h1>")
-});
-const server = http.createServer(app);
-
-server.listen(3000);    
